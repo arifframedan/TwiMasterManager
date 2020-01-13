@@ -44,7 +44,6 @@ void readTemperature (){
   if (cMillis - pMillis1 >= interval1){
     pMillis1 = cMillis;
     if (ds1621ReadTemp[0] == TRANSFER_DONE) {    //check previous transfer had finnish
-      //if 0x00, it mean the previous transfer already finish,
       Serial.print("Read temperature complete. Temp : ");
       //we can read back the data if any.
       //uint16_t temp = (ds1621ReadTemp[6] << 8) | ds1621ReadTemp[7];
@@ -52,7 +51,6 @@ void readTemperature (){
       //For this example, we just take the MSB byte
       Serial.println(temp);
       //initiate new transfer by loading buffer to twiMasterManager
-      //ds1621ReadTemp[0] == 0;
       twiMasterManager.loadQueueData((uint8_t*)ds1621ReadTemp);
     }
     else if (ds1621ReadTemp[0] == DEVICE_NOT_REPLY) {
@@ -69,12 +67,12 @@ void tryAccessNonExistDev (){
     if (nonExistDev[0] == TRANSFER_DONE) {
       Serial.println("Initiate access to NonExistDev...");
 	  //initiate new transfer by loading buffer to twiMasterManager
-      //nonExistDev[0] = 0;
       twiMasterManager.loadQueueData((uint8_t*)nonExistDev);
     }
     else if (nonExistDev[0] == DEVICE_NOT_REPLY) {
       Serial.println("NonExistDev not reply...");
-      nonExistDev[0] = 0;
+	  //For the sake of this demo, we manually set the status.
+      nonExistDev[0] = TRANSFER_DONE;
     }
   }
 }
