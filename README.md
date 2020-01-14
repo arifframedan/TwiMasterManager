@@ -6,15 +6,18 @@ ONLY support single master (Arduino UNO/NANO - Atmega328p as a Master) and multi
 ## Usage
 
 Just include the header as below:
-`#include <TwiMasterManager.h>`.
+
+`#include <TwiMasterManager.h>`
 
 This library provides you functions as below:
 
 - begin() , initialize the library.
-	`twiMasterManager.begin();`.
+
+	`twiMasterManager.begin();`
 
 - end() , to stop the library and release the I/O pins
-	`twiMasterManager.end();`.
+
+	`twiMasterManager.end();`
 
 - process() , to run the library core. This function MUST be call rapidly in the loop.
 	```
@@ -28,6 +31,7 @@ This library provides you functions as below:
 - loadQueueData(uint8_t* pBuffer) , to put the buffer into the queue. The buffer need to follow structure below.
 
 	1) Write & Read Transfer
+	
 		{Status, NumOfWriteByte, NumOfReadByte, Add+W, WriteByte0, ..., Add+R, ReadByte0, ...}
 
 		Example (base on DS1621 read temperature command)
@@ -38,6 +42,7 @@ This library provides you functions as below:
 
 
 	2) Write ONLY Transfer
+	
 		{Status, NumOfWriteByte, 0, Add+W, WriteByte0, ...}
 
 		Example (base on DS1621 start command)
@@ -47,7 +52,8 @@ This library provides you functions as below:
 		```
 
 The default queue size is 10, but you can set your own.
-	`#define QueueSize	yourqueuesize`.
+
+	`#define QueueSize	yourqueuesize`
 
 ## Example
 
