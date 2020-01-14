@@ -53,7 +53,7 @@ This library provides you functions as below:
 
 The default queue size is 10, but you can set your own.
 
-	`#define QueueSize	yourqueuesize`
+	#define QueueSize	yourqueuesize
 
 ## Example
 
