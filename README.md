@@ -11,15 +11,15 @@ Just include the header as below:
 
 This library provides you functions as below:
 
-- begin() , initialize the library.
+- ***begin()*** , initialize the library.
 
 	`twiMasterManager.begin();`
 
-- end() , to stop the library and release the I/O pins
+- ***end()*** , to stop the library and release the I/O pins
 
 	`twiMasterManager.end();`
 
-- process() , to run the library core. This function MUST be call rapidly in the loop.
+- ***process()*** , to run the library core. This function MUST be call rapidly in the loop.
 	```
 	void loop (){
 		...
@@ -28,11 +28,11 @@ This library provides you functions as below:
 	}
 	```
 
-- loadQueueData(uint8_t* pBuffer) , to put the buffer into the queue. The buffer need to follow structure below.
+- ***loadQueueData(uint8_t* pBuffer)*** , to put the buffer into the queue. The buffer need to follow structure below.
 
 	1) Write & Read Transfer
 	
-		{Status, NumOfWriteByte, NumOfReadByte, Add+W, WriteByte0, ..., Add+R, ReadByte0, ...}
+		**{Status, NumOfWriteByte, NumOfReadByte, Add+W, WriteByte0, ..., Add+R, ReadByte0, ...}**
 
 		Example (base on DS1621 read temperature command)
 		```
@@ -43,7 +43,7 @@ This library provides you functions as below:
 
 	2) Write ONLY Transfer
 	
-		{Status, NumOfWriteByte, 0, Add+W, WriteByte0, ...}
+		**{Status, NumOfWriteByte, 0, Add+W, WriteByte0, ...}**
 
 		Example (base on DS1621 start command)
 		```
