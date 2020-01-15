@@ -30,6 +30,11 @@ void setup() {
   //Send Start command to DS1621
   //initiate new transfer by loading buffer to twiMasterManager
   twiMasterManager.loadQueueData((uint8_t*)ds1621Start);
+  //Just for the first transfer, we need to set as below,
+  //or else our loop can't initiate for the first transfer 
+  //because we check this register in the functions before proceed.
+  ds1621ReadTemp[0] = TRANSFER_DONE;
+  nonExistDev[0]    = TRANSFER_DONE;
 }
 
 void loop() {
@@ -56,7 +61,7 @@ void readTemperature (){
     }
     else if (ds1621ReadTemp[0] == DEVICE_NOT_REPLY) {
       Serial.println("DS1621 not response!");
-	    //For the sake of this demo, we manually set the status.
+      //For the sake of this demo, we manually set the status.
       ds1621ReadTemp[0] = TRANSFER_DONE;
     }
   }
@@ -68,12 +73,12 @@ void tryAccessNonExistDev (){
     pMillis2 = cMillis;
     if (nonExistDev[0] == TRANSFER_DONE) {
       Serial.println("Initiate access to NonExistDev...");
-	  //initiate new transfer by loading buffer to twiMasterManager
+      //initiate new transfer by loading buffer to twiMasterManager
       twiMasterManager.loadQueueData((uint8_t*)nonExistDev);
     }
     else if (nonExistDev[0] == DEVICE_NOT_REPLY) {
       Serial.println("NonExistDev not reply...");
-	  //For the sake of this demo, we manually set the status.
+      //For the sake of this demo, we manually set the status.
       nonExistDev[0] = TRANSFER_DONE;
     }
   }
