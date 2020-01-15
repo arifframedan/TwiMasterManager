@@ -27,8 +27,8 @@ void setup() {
   Serial.println("TWI init");
   twiMasterManager.begin();
   Serial.println("Start command for DS1621");
+  //Send Start command to DS1621
   //initiate new transfer by loading buffer to twiMasterManager
-  //ds1621Start[0] == 0;
   twiMasterManager.loadQueueData((uint8_t*)ds1621Start);
 }
 
@@ -45,17 +45,19 @@ void readTemperature (){
     pMillis1 = cMillis;
     if (ds1621ReadTemp[0] == TRANSFER_DONE) {    //check previous transfer had finnish
       Serial.print("Read temperature complete. Temp : ");
-      //we can read back the data if any.
+      //we can read back the data.
       //uint16_t temp = (ds1621ReadTemp[6] << 8) | ds1621ReadTemp[7];
+      //actual temperature data is 2 byte,
+      //For this example, we just take the MSB byte	    
       uint8_t temp = ds1621ReadTemp[6];
-      //For this example, we just take the MSB byte
       Serial.println(temp);
-      //initiate new transfer by loading buffer to twiMasterManager
+      //initiate new transfer by loading buffer to twiMasterManager	    
       twiMasterManager.loadQueueData((uint8_t*)ds1621ReadTemp);
     }
     else if (ds1621ReadTemp[0] == DEVICE_NOT_REPLY) {
       Serial.println("DS1621 not response!");
-      ds1621ReadTemp[0] = 0;      //Clear the status
+	    //For the sake of this demo, we manually set the status.
+      ds1621ReadTemp[0] = TRANSFER_DONE;
     }
   }
 }
