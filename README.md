@@ -28,7 +28,7 @@ This library provides you functions as below:
 	}
 	```
 
-- ***loadQueueData(uint8_t* pBuffer)*** , to put the buffer into the queue. The buffer need to follow structure below.
+- ***loadQueueData(uint8_t\* pBuffer)*** , to put the buffer into the queue. The buffer need to follow structure below.
 
 	1) Write & Read Transfer
 	
