@@ -1,3 +1,8 @@
+/*
+This code is derived from the original Wire library by Nicholas Zambetti
+and modify by me to suit the purpose of this library.
+*/
+
 #include <compat/twi.h>
 #include "arduino.h"
 #include "pins_arduino.h"
