@@ -1,3 +1,8 @@
+/*
+This code is derived from the original Wire library by Nicholas Zambetti
+and modify by me to suit the purpose of this library.
+*/
+
 #ifndef _TWIUTIL_h
 #define _TWIUTIL_h
 
